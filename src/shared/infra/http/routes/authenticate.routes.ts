@@ -8,7 +8,7 @@ const authenticateUserController = new AuthenticateUserController();
 
 const refreshTokenController = new RefreshTokenController();
 
-authenticateRoutes.post("/sessions", authenticateUserController.handle);
+authenticateRoutes.post("/login", authenticateUserController.handle);
 authenticateRoutes.post("/refresh-token", refreshTokenController.handle);
 
 export { authenticateRoutes };

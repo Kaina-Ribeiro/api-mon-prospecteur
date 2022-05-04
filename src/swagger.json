@@ -43,32 +43,79 @@
             "description": "User already exists"
           }
         }
-      },
-      "get": {
-        "tags": ["User"],
-        "summary": "List all users",
-        "description": "List all users",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      }
-                    }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Create a session",
+        "description": "Create a new session",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
                   }
+                },
+                "example": {
+                  "email": "User name sample",
+                  "password": "User description sample"
                 }
               }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTE2ODMxNDYsImV4cCI6MTY1MTY4NDA0Niwic3ViIjoiNjI3MjllZGE2MDI4ZjIwYzA0ZjRiYmNmIn0.ubreCzu6tyddDNQKwvr6Qs4FudI-SoQHKPzgeZUeRy0",
+            "user": {
+              "name": "Gabdddddd test",
+              "email": "gabrsddde@e.com.br"
+            },
+            "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhYnJzZGRkZUBlLmNvbS5iciIsImlhdCI6MTY1MTY4MzE0NiwiZXhwIjoxNjU0Mjc1MTQ2LCJzdWIiOiI2MjcyOWVkYTYwMjhmMjBjMDRmNGJiY2YifQ.ZvUACsV9wG3CWsyl37ftOf6PXy_cISDxFg7LepbiRVA"
+          },
+          "500": {
+            "description": "E-mail or password incorrect"
+          }
+        }
+      }
+    },
+    "/refresh-token": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Update user token",
+        "description": "Update user token",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "User name sample",
+                  "password": "User description sample"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created"
+          },
+          "401": {
+            "status": "error",
+            "message": "Refresh Token does not exists!"
           }
         }
       }
