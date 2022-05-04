@@ -1,0 +1,10 @@
+version: "4.7"
+
+services: 
+  app:
+    build: .
+    container_name: mon_api
+    ports: 
+      - 3001:3001
+    volumes:
+      - .:/usr/app
