@@ -23,7 +23,16 @@
                   "name": {
                     "type": "string"
                   },
-                  "description": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "gender": {
+                    "type": "string"
+                  },
+                  "scholarity": {
+                    "type": "string"
+                  },
+                  "email": {
                     "type": "string"
                   }
                 },
