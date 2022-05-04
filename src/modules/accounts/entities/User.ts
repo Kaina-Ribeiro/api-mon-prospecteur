@@ -9,7 +9,7 @@ import {
 @Entity("users")
 class User {
   @ObjectIdColumn()
-  id: ObjectID;
+  _id: ObjectID;
 
   @Column()
   name: string;

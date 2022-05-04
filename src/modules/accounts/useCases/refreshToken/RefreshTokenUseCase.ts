@@ -1,13 +1,13 @@
 import { sign, verify } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
-import { ObjectID } from "typeorm";
+import { ObjectID as MongoObjectID } from "mongodb";
 import auth from "../../../../config/auth";
 import { AppError } from "../../../../shared/errors/AppError";
 import { IDateProvider } from "../../../../shared/container/providers/DateProvider/IDateProvider";
 import { IUsersTokensRepository } from "../../repositories/IUsersTokensRepository";
 
 interface IPayload {
-  sub: ObjectID;
+  sub: string;
   email: string;
 }
 
@@ -25,7 +25,7 @@ class RefreshTokenUseCase {
     private dateProvider: IDateProvider
   ) {}
 
-  async execute(token: ObjectID): Promise<ITokenResponse> {
+  async execute(token: string): Promise<ITokenResponse> {
     const {
       secret_token,
       expires_in_token,
@@ -35,24 +35,24 @@ class RefreshTokenUseCase {
     } = auth;
 
     const { email, sub: user_id } = verify(
-      token.toString(),
+      token,
       secret_refresh_token
     ) as IPayload;
 
     const userToken =
       await this.usersTokensRepository.findByUserIdAndRefreshToken(
         user_id,
-        token.toString()
+        token
       );
 
     if (!userToken) {
       throw new AppError("Refresh Token does not exists!");
     }
 
-    await this.usersTokensRepository.deleteById(userToken.id);
+    await this.usersTokensRepository.deleteById(userToken._id);
 
     const refresh_token = sign({ email }, secret_refresh_token, {
-      subject: user_id.toString(),
+      subject: user_id,
       expiresIn: expires_in_refresh_token,
     });
 
@@ -61,13 +61,13 @@ class RefreshTokenUseCase {
     );
 
     await this.usersTokensRepository.create({
-      user_id,
+      user_id: new MongoObjectID(user_id),
       refresh_token,
       expires_date: refresh_token_expires_date,
     });
 
     const newToken = sign({}, secret_token, {
-      subject: user_id.toString(),
+      subject: user_id,
       expiresIn: expires_in_token,
     });
 

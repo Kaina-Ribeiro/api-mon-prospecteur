@@ -17,6 +17,7 @@
   },
   "plugins": ["@typescript-eslint", "eslint-plugin-import-helpers", "prettier"],
   "rules": {
+    "no-underscore-dangle": "off",
     "camelcase": "off",
     "no-use-before-define": "off",
     "no-useless-constructor": "off",

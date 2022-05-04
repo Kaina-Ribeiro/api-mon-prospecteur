@@ -12,12 +12,12 @@ import { User } from "./User";
 @Entity("users_tokens")
 class UserTokens {
   @ObjectIdColumn()
-  id: ObjectID;
+  _id: ObjectID;
 
   @Column()
   refresh_token: string;
 
-  @Column()
+  @ObjectIdColumn()
   user_id: ObjectID;
 
   @ManyToOne(() => User)
