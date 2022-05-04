@@ -34,3 +34,16 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }} 
           source: "., !node_modules"
           target: "~/prod/api-mon-prospecteur"
+      
+      - name: Update API
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }} 
+          passphrase: ${{ secrets.SSH_PASSPHRASE }} 
+          script: |
+            cd ~/prod/api-mon-prospecteur
+            yarn
+            pm2 restart api_mon
