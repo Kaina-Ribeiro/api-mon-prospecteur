@@ -1,6 +1,5 @@
 import { ObjectID, Repository } from "typeorm";
-import { AppDataSource } from "../../../../database";
-
+import AppDataSource from "../../../../shared/infra/database";
 import { ICreateUserTokenDTO } from "../../dtos/ICreateUserTokenDTO";
 import { UserTokens } from "../../entities/UserTokens";
 import { IUsersTokensRepository } from "../IUsersTokensRepository";
@@ -9,7 +8,7 @@ class UsersTokensRepository implements IUsersTokensRepository {
   private repository: Repository<UserTokens>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(UserTokens);
+    this.repository = AppDataSource.getMongoRepository(UserTokens);
   }
 
   async create({

@@ -1,5 +1,5 @@
 import { ObjectID, Repository } from "typeorm";
-import { AppDataSource } from "../../../../database";
+import AppDataSource from "../../../../shared/infra/database";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../IUsersRepository";
@@ -8,7 +8,7 @@ class UsersRepository implements IUsersRepository {
   private repository: Repository<User>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(User);
+    this.repository = AppDataSource.getMongoRepository(User);
   }
 
   async create({

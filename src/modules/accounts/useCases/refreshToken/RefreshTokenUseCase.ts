@@ -2,7 +2,7 @@ import { sign, verify } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 import { ObjectID } from "typeorm";
 import auth from "../../../../config/auth";
-import { AppError } from "../../../../errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
 import { IDateProvider } from "../../../../shared/container/providers/DateProvider/IDateProvider";
 import { IUsersTokensRepository } from "../../repositories/IUsersTokensRepository";
 
