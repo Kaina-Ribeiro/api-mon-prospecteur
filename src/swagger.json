@@ -38,7 +38,10 @@
                 },
                 "example": {
                   "name": "User name sample",
-                  "description": "User description sample"
+                  "password": "User password sample",
+                  "gender": "User gender sample",
+                  "scholarity": "User scholarity sample",
+                  "email": "User password sample"
                 }
               }
             }
@@ -71,10 +74,6 @@
                   "password": {
                     "type": "string"
                   }
-                },
-                "example": {
-                  "email": "User name sample",
-                  "password": "User description sample"
                 }
               }
             }
@@ -82,12 +81,7 @@
         },
         "responses": {
           "200": {
-            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTE2ODMxNDYsImV4cCI6MTY1MTY4NDA0Niwic3ViIjoiNjI3MjllZGE2MDI4ZjIwYzA0ZjRiYmNmIn0.ubreCzu6tyddDNQKwvr6Qs4FudI-SoQHKPzgeZUeRy0",
-            "user": {
-              "name": "Gabdddddd test",
-              "email": "gabrsddde@e.com.br"
-            },
-            "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhYnJzZGRkZUBlLmNvbS5iciIsImlhdCI6MTY1MTY4MzE0NiwiZXhwIjoxNjU0Mjc1MTQ2LCJzdWIiOiI2MjcyOWVkYTYwMjhmMjBjMDRmNGJiY2YifQ.ZvUACsV9wG3CWsyl37ftOf6PXy_cISDxFg7LepbiRVA"
+            "description": "OK"
           },
           "500": {
             "description": "E-mail or password incorrect"
@@ -111,8 +105,7 @@
                   }
                 },
                 "example": {
-                  "email": "User name sample",
-                  "password": "User description sample"
+                  "token": "User name sample"
                 }
               }
             }
@@ -120,11 +113,33 @@
         },
         "responses": {
           "200": {
-            "description": "Created"
+            "token": "token",
+            "user": {
+              "name": "User name sample",
+              "email": "user@emailr"
+            },
+            "refresh_token": "refresh token"
           },
           "401": {
             "status": "error",
             "message": "Refresh Token does not exists!"
+          }
+        }
+      }
+    },
+    "/address/:address": {
+      "post": {
+        "tags": ["Search Addresses"],
+        "summary": "Search for addresses",
+        "description": "Search for addresses",
+
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "status": "error",
+            "message": "Not found!"
           }
         }
       }
