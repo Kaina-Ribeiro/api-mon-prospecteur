@@ -17,11 +17,11 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ### 🎲 **Back End (servidor)**
 
-- Esta é uma API Rest que está hospedada na AWS: http://15.228.78.209
+- Esta é uma API Rest que está hospedada na AWS: http://15.228.47.130/api
 
 ### 📋 **Documentação da API feita com swagger**
 
-- Link para documentação da API http://15.228.78.209/api-docs/
+- Link para documentação da API http://15.228.47.130/api/api-docs/
 
 ### Pré-requisitos
 
